@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>this is a test !</div>
+    <button>test</button>
+    <div>A long long long long long long long long long long long long long long long long long long long long long long long paragraph.</div>
+
+    <script>
+        window.onload = function(){
+            // 遍历所有最底层的节点，并添加鼠标事件
+            function addEvent(node){
+                if(node.children.length > 0){
+                    for(let i = 0,len = node.children.length; i < len; i++){
+                        addEvent(node.children[i])
+                    }
+                    return
+                }
+                node.addEventListener('mouseover',function(){
+                    let width = this.offsetWidth
+                    let height = this.offsetHeight
+                    let left = getLeft(this)
+                    let top = getTop(this)
+                    createCover(width,height,left,top)
+                })
+        
+            }
+
+            function getLeft(element){
+                let left = element.offsetLeft
+                if(element.offsetParent != null){
+                    left += getLeft(element.offsetParent)
+                }
+                return left
+            }
+
+            function getTop(element){
+                let top = element.offsetTop
+                if(element.offsetParent != null){
+                    top += getLeft(element.offsetParent)
+                }
+                return top
+            }
+
+            function createCover(width,height,left,top){
+                let div = document.createElement("div")
+                div.setAttribute('class','shallow-track-active')
+                div.style.position = 'absolute'
+                div.style.width = width + 'px'
+                div.style.height = height + 'px'
+                div.style.left = left + 'px'
+                div.style.top = top + 'px'
+                div.style.backgroundColor = 'rgba(123,23,33,0.4)'
+
+                div.addEventListener('mouseout',function(){
+                    let mouseEventElement = document.querySelector(".shallow-track-active")
+                    body.removeChild(mouseEventElement)
+                })
+                body.appendChild(div)
+            }
+
+            let body = document.querySelector("body")
+            addEvent(body)
+
+
+        }
+    </script>
+</body>
+</html>
