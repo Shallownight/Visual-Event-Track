@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<div>
+</div>
+<script>
+	// 界面warpper
+	let interface = document.createElement("div")
+	interface.style.width = "400px"
+	interface.style.height = "270px"
+	interface.style.backgroundColor = "grey"
+	window.document.body.appendChild(interface)
+
+	// 增加事件Button
+	let userEvent = document.createElement("div")
+	let userInput = document.createElement("input")
+	userInput.setAttribute("type","text")
+	let userButton = document.createElement("button")
+	userButton.innerText = "添加"
+	userEvent.appendChild(userInput)
+	userEvent.appendChild(userButton)
+	
+	interface.appendChild(userEvent)
+</script>	
+
+</body>
+</html>
